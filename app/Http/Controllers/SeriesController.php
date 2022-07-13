@@ -15,6 +15,6 @@ class SeriesController extends Controller
             'The Good Doctor'
         ];
 
-        return view('list-series')->with('series', $series);
+        return view('series.index')->with('series', $series);
     }
 }
