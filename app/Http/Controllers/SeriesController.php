@@ -22,4 +22,10 @@ class SeriesController extends Controller
     {
         return view('series.create');
     }
+
+    public function store(Request $request)
+    {
+        $nome = $request->input('name');
+        
+    }
 }
