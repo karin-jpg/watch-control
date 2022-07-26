@@ -22,7 +22,12 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        $nome = $request->input('name');
+        $name = $request->input('name');
+        $series = new Series();
+        $series->name = $name;
+        $series->save();
         
+        return redirect('/series');
+
     }
 }
