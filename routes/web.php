@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::controller(SeriesController::class)->group(function () {
     Route::get('/series', 'index')->name('series.index');
     Route::get('/series/create', 'create')->name('series.create');
-    Route::post('/series/save', 'store')->name('series.save');
+    Route::post('/series/store', 'store')->name('series.store');
+    Route::post('/series/destroy/{id}', 'destroy')->name('series.destroy');
 });
 
