@@ -1,5 +1,5 @@
 <x-layout title="Add new serie">
-    <form action="{{ route('series.create') }}" method="post">
+    <form action="{{ route('series.save') }}" method="post">
         @csrf
         <div class="mb-2">
             <label for="name" class="form-label">Name</label>
