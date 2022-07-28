@@ -10,4 +10,5 @@ class Series extends Model
     use HasFactory;
 
     protected $table = "series";
+    protected $fillable = ['name'];
 }
