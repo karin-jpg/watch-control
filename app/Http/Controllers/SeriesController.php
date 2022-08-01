@@ -21,6 +21,9 @@ class SeriesController extends Controller
 
 	public function store(Request $request)
 	{
+        $request->validate([
+            "name" => ["required", "min:5"]
+        ]);
 		$series = Series::create($request->all());
 		return to_route('series.index')->with('message.success', "Series '$series->name' added successfully!");
 
