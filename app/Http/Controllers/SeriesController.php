@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-	public function index(Request $request)
+	public function index()
 	{
-
 		$series = Series::query()->orderBy('name')->get();
         $successMessage = session('message.success');
 		return view('series.index')->with('series', $series)->with('successMessage', $successMessage);
@@ -35,6 +34,15 @@ class SeriesController extends Controller
 
     public function edit(Series $series)
     {
-        return view ('series.edit')->with('series', $series);
+        return view('series.edit')->with('series', $series);
+    }
+
+    public function update(Series $series, Request $request)
+    {
+        $series->fill($request->all());
+        $series->save();
+
+        return to_route('series.index')->with('message.success', "Series '$series->name' updated successfully!");
+
     }
 }
