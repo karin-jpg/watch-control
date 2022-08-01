@@ -32,4 +32,9 @@ class SeriesController extends Controller
 		$series->delete();
         return to_route('series.index')->with('message.success', "Series '$series->name' removed successfully!");
 	}
+
+    public function edit(Series $series)
+    {
+        return view ('series.edit')->with('series', $series);
+    }
 }
