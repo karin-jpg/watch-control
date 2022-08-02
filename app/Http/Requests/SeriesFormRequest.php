@@ -27,4 +27,12 @@ class SeriesFormRequest extends FormRequest
             "name" => ["required", "min:5"]
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => "'name' field is required!",
+            'name.min' => "The field 'name' must have at least :min characters"
+        ];
+    }
 }
