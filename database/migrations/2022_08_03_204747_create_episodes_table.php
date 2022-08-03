@@ -6,26 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('episodes', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('episodes', function (Blueprint $table) {
+			$table->id();
+			$table->unsignedTinyInteger('number');
+			$table->foreignId('season_id')->constrained();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('episodes');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('episodes');
+	}
 };
