@@ -37,7 +37,6 @@ class SeriesController extends Controller
 
 	public function edit(Series $series)
 	{
-		dd($series->seasons);
 		return view('series.edit')->with('series', $series);
 	}
 
