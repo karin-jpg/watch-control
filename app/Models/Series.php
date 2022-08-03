@@ -11,4 +11,10 @@ class Series extends Model
 
     protected $table = "series";
     protected $fillable = ['name'];
+
+
+    public function seasons()
+    {
+        return $this->hasMany(Season::class);
+    }
 }
