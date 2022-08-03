@@ -11,7 +11,7 @@ class SeriesController extends Controller
 	public function index()
 	{
 		$series = Series::query()->orderBy('name')->get();
-        $successMessage = session('message.success');
+		$successMessage = session('message.success');
 		return view('series.index')->with('series', $series)->with('successMessage', $successMessage);
 	}
 
@@ -24,29 +24,30 @@ class SeriesController extends Controller
 	{
 		$series = Series::create($request->all());
 		return to_route('series.index')
-            ->with('message.success', "Series '$series->name' added successfully!");
+			->with('message.success', "Series '$series->name' added successfully!");
 
 	}
 
 	public function destroy(Series $series)
 	{
 		$series->delete();
-        return to_route('series.index')
-            ->with('message.success', "Series '$series->name' removed successfully!");
+		return to_route('series.index')
+			->with('message.success', "Series '$series->name' removed successfully!");
 	}
 
-    public function edit(Series $series)
-    {
-        return view('series.edit')->with('series', $series);
-    }
+	public function edit(Series $series)
+	{
+		dd($series->seasons);
+		return view('series.edit')->with('series', $series);
+	}
 
-    public function update(Series $series, SeriesFormRequest $request)
-    {
-        $series->fill($request->all());
-        $series->save();
+	public function update(Series $series, SeriesFormRequest $request)
+	{
+		$series->fill($request->all());
+		$series->save();
 
-        return to_route('series.index')
-            ->with('message.success', "Series '$series->name' updated successfully!");
+		return to_route('series.index')
+			->with('message.success', "Series '$series->name' updated successfully!");
 
-    }
+	}
 }
