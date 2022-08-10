@@ -7,6 +7,7 @@ use App\Models\Episode;
 use App\Models\Season;
 use App\Models\Series;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class SeriesController extends Controller
 {
@@ -58,7 +59,7 @@ class SeriesController extends Controller
 
 			DB::rollBack();
 			return to_route('series.index')->withErrors(["queryException" => "An error occurred while trying to add a series!"]);
-		} catch(\Exception) {
+		} catch(Throwable) {
 
 			DB::rollBack();
 			return to_route('series.index')->withErrors(["exception" => "An error occurred on the system!"]);
