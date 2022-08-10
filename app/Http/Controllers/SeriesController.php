@@ -32,6 +32,7 @@ class SeriesController extends Controller
 			$seasons =[];
 
 			for($currentSeason = 1; $currentSeason <= $request->seasons; $currentSeason++){
+
 				$seasons[] = [
 					"series_id" => $series->id,
 					"number" => $currentSeason
