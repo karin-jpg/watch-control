@@ -6,7 +6,7 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Models\Episode;
 use App\Models\Season;
 use App\Models\Series;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
@@ -24,31 +24,45 @@ class SeriesController extends Controller
 
 	public function store(SeriesFormRequest $request)
 	{
+		try{
+			DB::beginTransaction();
 
-		$series = Series::create($request->all());
-		$seasons =[];
-		for($currentSeason = 1; $currentSeason <= $request->seasons; $currentSeason++){
-			$seasons[] = [
-				"series_id" => $series->id,
-				"number" => $currentSeason
-			];
-		}
-		Season::insert($seasons);
+			$series = Series::create($request->all());
+			$seasons =[];
 
-		$episodes = [];
-		foreach ($series->seasons as $season) {
-			for($currentEpisode = 1; $currentEpisode <= $request->episodes; $currentEpisode++){
-				$episodes[] = [
-					"season_id" => $season->id,
-					"number" => $currentEpisode
+			for($currentSeason = 1; $currentSeason <= $request->seasons; $currentSeason++){
+				$seasons[] = [
+					"series_id" => $series->id,
+					"number" => $currentSeason
 				];
 			}
-		}
+			Season::insert($seasons);
 
-		Episode::insert($episodes);
+			$episodes = [];
+			foreach ($series->seasons as $season) {
+				for($currentEpisode = 1; $currentEpisode <= $request->episodes; $currentEpisode++){
+					$episodes[] = [
+						"season_id" => $season->id,
+						"number" => $currentEpisode
+					];
+				}
+			}
 
-		return to_route('series.index')
+			Episode::insert($episodes);
+			DB::commit();
+
+			return to_route('series.index')
 			->with('message.success', "Series '$series->name' added successfully!");
+
+		} catch(\Illuminate\Database\QueryException) {
+
+			DB::rollBack();
+			return to_route('series.index')->withErrors(["queryException" => "An error occurred while trying to add a series!"]);
+		} catch(\Exception) {
+
+			DB::rollBack();
+			return to_route('series.index')->withErrors(["exception" => "An error occurred on the system!"]);
+		}
 
 	}
 
