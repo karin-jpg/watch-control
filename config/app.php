@@ -195,7 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-		App\Providers\SeriesRepositoryProvider::class,
+		App\Providers\RepositoriesProvider::class,
 
     ],
 
