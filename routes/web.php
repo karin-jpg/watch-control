@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::controller(SeriesController::class)->group(function () {
 	Route::post('/series/store', 'store')->name('series.store');
 	Route::delete('/series/{series}/destroy', 'destroy')->name('series.destroy');
     Route::put('/series/{series}/update', 'update')->name('series.update');
+});
+
+Route::controller(EpisodesController::class)->group(function () {
+	Route::get('/seasons/{season}/episodes', 'index')->name('episodes.index');
 });
 
 Route::controller(SeasonsController::class)->group(function () {
