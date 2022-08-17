@@ -16,6 +16,14 @@ class EpisodesController extends Controller
 	public function update(Request $request, Season $season)
 	{
 		$watchedEpisodes = $request->episodes;
+
+		if(!$watchedEpisodes) {
+			Episode::where('season_id', $season->id)
+			->update(['watched' => 0]);
+
+			return to_route('episodes.index', $season);
+		}
+
 		Episode::whereIn('id', $watchedEpisodes)
 			->where('season_id', $season->id)
 			->update(['watched' => 1]);
