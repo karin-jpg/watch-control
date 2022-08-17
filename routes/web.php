@@ -4,7 +4,7 @@ use App\Http\Controllers\EpisodesController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +31,9 @@ Route::controller(SeriesController::class)->group(function () {
 
 Route::controller(EpisodesController::class)->group(function () {
 	Route::get('/seasons/{season}/episodes', 'index')->name('episodes.index');
+	Route::post('/seasons/{season}/episodes', function (Request $request) {
+		dd($request->all());
+	});
 });
 
 Route::controller(SeasonsController::class)->group(function () {
