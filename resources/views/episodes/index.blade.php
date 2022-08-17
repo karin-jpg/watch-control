@@ -1,7 +1,7 @@
 <x-layout title="Episodes">
 <div class="d-flex justify-content-between"">
 	<a href="{{ route('seasons.index', $series->id) }}" class="btn btn-dark mb-2">Seasons of {{$series->name}}</a>
-	<button class="btn btn-dark mb-2" id="checkButton" onclick="checkUncheckAllEpisodes()">Check All</button>
+	<button class="btn btn-dark mb-2" id="checkButton" onclick="checkUncheckAllEpisodes()"></button>
 </div>
 <form method="post">
 	@csrf
