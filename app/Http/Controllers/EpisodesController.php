@@ -16,13 +16,18 @@ class EpisodesController extends Controller
 
     public function index(Season $season)
 	{
-		return view('episodes.index')->with('episodes', $season->episodes)->with('series', $season->series);
+		$successMessage = session('message.success');
+		return view('episodes.index')
+			->with('episodes', $season->episodes)
+			->with('series', $season->series)
+			->with('successMessage', $successMessage);
 	}
 
 	public function update(Request $request, Season $season)
 	{
 		$this->repository->update($request, $season);
 
-		return to_route('episodes.index', $season);
+		return to_route('episodes.index', $season)
+			->with('message.success', 'Episodes updated with sucess!');
 	}
 }
