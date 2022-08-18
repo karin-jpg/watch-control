@@ -10,7 +10,13 @@
 <div class="container">
 <body>
 	<h1>{{ $title }}</h1>
-	@if ($errors->any())
+
+	@isset($successMessage)
+		<div class="alert alert-success">
+			{{ $successMessage }}
+		</div>
+	@endisset
+	@if($errors->any())
 		<div class="alert alert-danger">
 			<ul>
 				@foreach ($errors->all() as $error)
