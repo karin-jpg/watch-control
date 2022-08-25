@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EpisodesController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Middleware\Authenticator;
@@ -36,4 +37,9 @@ Route::controller(EpisodesController::class)->group(function () {
 
 Route::controller(SeasonsController::class)->group(function () {
 	Route::get('/series/{series}/seasons', 'index')->name('seasons.index');
+});
+
+Route::controller(LoginController::class)->group(function () {
+	Route::get('/login', 'index')->name('login');
+	Route::post('/login', 'login');
 });
