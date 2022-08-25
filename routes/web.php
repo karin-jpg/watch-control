@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\EpisodesController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\UsersController;
+use App\Http\Middleware\Authenticator;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 	return redirect('/series');
-});
+})->middleware(Authenticator::class);
 
 Route::controller(SeriesController::class)->group(function () {
 	Route::get('/series', 'index')->name('series.index');
@@ -35,4 +38,15 @@ Route::controller(EpisodesController::class)->group(function () {
 
 Route::controller(SeasonsController::class)->group(function () {
 	Route::get('/series/{series}/seasons', 'index')->name('seasons.index');
+});
+
+Route::controller(LoginController::class)->group(function () {
+	Route::get('/login', 'index')->name('login');
+	Route::post('/login', 'login');
+	Route::get('/logout', 'destroy')->name('logout');
+});
+
+Route::controller(UsersController::class)->group(function () {
+	Route::get('/users/create', 'create')->name('users.create');
+	Route::post('/users', 'store')->name('users.store');
 });
