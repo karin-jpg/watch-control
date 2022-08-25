@@ -14,8 +14,10 @@ class LoginController extends Controller
 
 	public function login(Request $request)
 	{
-		if(!Auth::attempt($request->except(['_token']))) {
+		if(!Auth::attempt($request->only(['email', 'password']))) {
 			return redirect()->back()->withErrors("User or password incorrect");
 		}
+
+		return to_route('series.index');
 	}
 }
