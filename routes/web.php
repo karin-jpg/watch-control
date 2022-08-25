@@ -43,3 +43,7 @@ Route::controller(LoginController::class)->group(function () {
 	Route::get('/login', 'index')->name('login');
 	Route::post('/login', 'login');
 });
+
+Route::controller(UsersController::class)->group(function () {
+	Route::get('/users/create', 'create')->name('users.create');
+});

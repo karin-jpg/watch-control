@@ -11,5 +11,9 @@
 			<input type="password" name="password" id="password" class="form-control">
 		</div>
 		<button class="btn btn-primary mt-3">Login</button>
+
+		<a href=" {{ route('users.create') }}" class="btn btn-secondary mt-3">
+			Create login
+		</a>
 	</form>
 </x-layout>
