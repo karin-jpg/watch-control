@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Series;
-use Illuminate\Http\Request;
+use App\Repositories\Series\SeriesRepository;
 
 class SeriesController extends Controller
 {
+
+	public function __construct(private SeriesRepository $repository)
+	{
+
+	}
 	public function index()
 	{
-		$series = Series::query()->orderBy('name')->get();
-        $successMessage = session('message.success');
+		$series = Series::all();
+		$successMessage = session('message.success');
 		return view('series.index')->with('series', $series)->with('successMessage', $successMessage);
 	}
 
@@ -22,31 +27,32 @@ class SeriesController extends Controller
 
 	public function store(SeriesFormRequest $request)
 	{
-		$series = Series::create($request->all());
+		$series = $this->repository->add($request);
+
 		return to_route('series.index')
-            ->with('message.success', "Series '$series->name' added successfully!");
+		->with('message.success', "Series '$series->name' added successfully!");
 
 	}
 
 	public function destroy(Series $series)
 	{
 		$series->delete();
-        return to_route('series.index')
-            ->with('message.success', "Series '$series->name' removed successfully!");
+		return to_route('series.index')
+			->with('message.success', "Series '$series->name' removed successfully!");
 	}
 
-    public function edit(Series $series)
-    {
-        return view('series.edit')->with('series', $series);
-    }
+	public function edit(Series $series)
+	{
+		return view('series.edit')->with('series', $series);
+	}
 
-    public function update(Series $series, SeriesFormRequest $request)
-    {
-        $series->fill($request->all());
-        $series->save();
+	public function update(Series $series, SeriesFormRequest $request)
+	{
+		$series->fill($request->all());
+		$series->save();
 
-        return to_route('series.index')
-            ->with('message.success', "Series '$series->name' updated successfully!");
+		return to_route('series.index')
+			->with('message.success', "Series '$series->name' updated successfully!");
 
-    }
+	}
 }
