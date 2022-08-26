@@ -7,6 +7,7 @@ use App\Models\Series;
 use App\Models\Season;
 use App\Models\Episode;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class EloquentSeriesRepository implements SeriesRepository
 {
@@ -14,7 +15,10 @@ class EloquentSeriesRepository implements SeriesRepository
 	{
 
 		return DB::transaction(function () use ($request) {
-			$series = Series::create($request->all());
+			$seriesInfo = $request->all();
+			$seriesInfo['user_id'] = Auth::id();
+
+			$series = Series::create($seriesInfo);
 			$seasons =[];
 
 			for($currentSeason = 1; $currentSeason <= $request->seasons; $currentSeason++){

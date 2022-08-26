@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Series;
 use App\Repositories\Series\SeriesRepository;
+use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
 {
@@ -15,7 +16,7 @@ class SeriesController extends Controller
 	}
 	public function index()
 	{
-		$series = Series::all();
+		$series = Series::where('user_id', Auth::id())->get();
 		$successMessage = session('message.success');
 		return view('series.index')->with('series', $series)->with('successMessage', $successMessage);
 	}
