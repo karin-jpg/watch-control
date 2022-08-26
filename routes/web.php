@@ -25,10 +25,10 @@ Route::get('/', function () {
 Route::controller(SeriesController::class)->group(function () {
 	Route::get('/series', 'index')->name('series.index');
 	Route::get('/series/create', 'create')->name('series.create');
-    Route::get('/series/{series}/edit', 'edit')->name('series.edit');
+	Route::get('/series/{series}/edit', 'edit')->name('series.edit');
 	Route::post('/series/store', 'store')->name('series.store');
 	Route::delete('/series/{series}/destroy', 'destroy')->name('series.destroy');
-    Route::put('/series/{series}/update', 'update')->name('series.update');
+	Route::put('/series/{series}/update', 'update')->name('series.update');
 });
 
 Route::controller(EpisodesController::class)->group(function () {
