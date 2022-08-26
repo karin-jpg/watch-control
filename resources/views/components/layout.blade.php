@@ -8,15 +8,17 @@
 	<link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="{{ route('series.index') }}">Series</a>
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{ route('series.index') }}">Series</a>
+		@auth
 			<a href="{{ route('logout') }}">Logout</a>
-		</div>
-	</nav>
+		@endauth
+	</div>
+</nav>
+
 <div class="container">
 	<body>
 		<h1>{{ $title }}</h1>
-
 		@isset($successMessage)
 			<div class="alert alert-success">
 				{{ $successMessage }}

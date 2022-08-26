@@ -18,26 +18,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	return redirect('/series');
-})->middleware(Authenticator::class);
+Route::middleware(Authenticator::class)->group(function () {
 
-Route::controller(SeriesController::class)->group(function () {
-	Route::get('/series', 'index')->name('series.index');
-	Route::get('/series/create', 'create')->name('series.create');
-    Route::get('/series/{series}/edit', 'edit')->name('series.edit');
-	Route::post('/series/store', 'store')->name('series.store');
-	Route::delete('/series/{series}/destroy', 'destroy')->name('series.destroy');
-    Route::put('/series/{series}/update', 'update')->name('series.update');
-});
+	Route::get('/', function () {
+		return redirect('/series');
+	});
 
-Route::controller(EpisodesController::class)->group(function () {
-	Route::get('/seasons/{season}/episodes', 'index')->name('episodes.index');
-	Route::post('/seasons/{season}/episodes', 'update')->name('episodes.update');
-});
+	Route::controller(SeriesController::class)->group(function () {
+		Route::get('/series', 'index')->name('series.index');
+		Route::get('/series/create', 'create')->name('series.create');
+		Route::get('/series/{series}/edit', 'edit')->name('series.edit');
+		Route::post('/series/store', 'store')->name('series.store');
+		Route::delete('/series/{series}/destroy', 'destroy')->name('series.destroy');
+		Route::put('/series/{series}/update', 'update')->name('series.update');
+	});
 
-Route::controller(SeasonsController::class)->group(function () {
-	Route::get('/series/{series}/seasons', 'index')->name('seasons.index');
+	Route::controller(EpisodesController::class)->group(function () {
+		Route::get('/seasons/{season}/episodes', 'index')->name('episodes.index');
+		Route::post('/seasons/{season}/episodes', 'update')->name('episodes.update');
+	});
+
+	Route::controller(SeasonsController::class)->group(function () {
+		Route::get('/series/{series}/seasons', 'index')->name('seasons.index');
+	});
 });
 
 Route::controller(LoginController::class)->group(function () {
