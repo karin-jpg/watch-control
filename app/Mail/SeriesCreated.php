@@ -28,6 +28,6 @@ class SeriesCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.series-created');
+        return $this->markdown('mail.series-created');
     }
 }
