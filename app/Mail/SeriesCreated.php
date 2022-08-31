@@ -16,9 +16,13 @@ class SeriesCreated extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+		public string $seriesName,
+		public int $seriesId,
+		public int $seasonsCount,
+		public int $episodesCount)
     {
-        //
+
     }
 
     /**
