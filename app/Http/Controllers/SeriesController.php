@@ -39,7 +39,7 @@ class SeriesController extends Controller
 			$request->episodes
 		);
 
-		Mail::to($request->user())->send($email);
+		Mail::to($request->user())->queue($email);
 
 		return to_route('series.index')
 		->with('message.success', "Series '$series->name' added successfully!");
