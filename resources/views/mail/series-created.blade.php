@@ -2,7 +2,7 @@
 
 # A new series has been added!
 
-{{$seriesName}} with {{$seasonsCount}} and {{$episodesCount}} has been created
+{{$seriesName}} with {{$seasonsCount}} seasons and {{$episodesCount}} episodes has been created
 
 You can see it right here:
 
