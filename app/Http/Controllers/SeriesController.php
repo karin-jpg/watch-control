@@ -32,15 +32,6 @@ class SeriesController extends Controller
 	{
 		$series = $this->repository->add($request);
 
-		$email = New SeriesCreated(
-			$series->name,
-			$series->id,
-			$request->seasons,
-			$request->episodes
-		);
-
-		Mail::to($request->user())->queue($email);
-
 		return to_route('series.index')
 		->with('message.success', "Series '$series->name' added successfully!");
 
