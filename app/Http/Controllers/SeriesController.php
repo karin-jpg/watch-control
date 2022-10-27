@@ -6,7 +6,6 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Mail\SeriesCreated;
 use App\Models\Series;
 use App\Repositories\Series\SeriesRepository;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
@@ -31,6 +30,14 @@ class SeriesController extends Controller
 	public function store(SeriesFormRequest $request)
 	{
 		$series = $this->repository->add($request);
+
+		$seriesCreatedEvent = new SeriesCreated(
+			$series->name,
+			$series->id,
+			$request->seasons,
+			$request->episodes
+		);
+		event($seriesCreatedEvent);
 
 		return to_route('series.index')
 		->with('message.success', "Series '$series->name' added successfully!");
