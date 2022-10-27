@@ -2,10 +2,6 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Repositories\Series\SeriesRepository;
-use App\Models\Series;
 use App\Events\SeriesCreated as SeriesCreatedEvent;
 use App\Mail\SeriesCreated;
 use Illuminate\Support\Facades\Mail;
