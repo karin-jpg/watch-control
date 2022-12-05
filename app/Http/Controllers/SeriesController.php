@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
-use App\Mail\SeriesCreated;
+use App\Events\SeriesCreated;
 use App\Models\Series;
 use App\Repositories\Series\SeriesRepository;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 class SeriesController extends Controller
@@ -32,14 +31,12 @@ class SeriesController extends Controller
 	{
 		$series = $this->repository->add($request);
 
-		$email = New SeriesCreated(
+		SeriesCreated::dispatch(
 			$series->name,
 			$series->id,
 			$request->seasons,
 			$request->episodes
 		);
-
-		Mail::to($request->user())->queue($email);
 
 		return to_route('series.index')
 		->with('message.success', "Series '$series->name' added successfully!");
