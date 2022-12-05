@@ -25,6 +25,12 @@
 					class="form-control">
 		</div>
 	</div>
+	<div class="row mb-3">
+		<div class="col-12">
+			<label for="cover" class="form-label">Cover</label>
+			<input type="file" id="cover" class="form-control" accept="image/gif, image/jpeg, image/png">
+		</div>
+	</div>
 	<button type="submit" class="btn btn-primary">Add</button>
 </form>
 
