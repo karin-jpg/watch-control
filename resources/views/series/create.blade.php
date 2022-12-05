@@ -1,6 +1,6 @@
 <x-layout title="New serie">
 	<a href="{{ route('series.index') }}" class="btn btn-dark mb-2">Series</a>
-	<form action="{{route('series.store')}}" method="post">
+	<form action="{{route('series.store')}}" method="post" enctype="multipart/form-data">
 	@csrf
 	<div class="row mb-3">
 		<div class="col-md-8 col-xs-4">
