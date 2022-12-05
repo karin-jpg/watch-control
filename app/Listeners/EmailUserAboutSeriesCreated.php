@@ -4,10 +4,11 @@ namespace App\Listeners;
 
 use App\Events\SeriesCreated as SeriesCreatedEvent;
 use App\Mail\SeriesCreated;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
-class EmailUserAboutSeriesCreated
+class EmailUserAboutSeriesCreated implements ShouldQueue
 {
     /**
      * Create the event listener.
