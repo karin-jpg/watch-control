@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('series', function (Blueprint $table) {
-            $table->string('cover_path')->nullable();
+            $table->string('cover')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('series', function (Blueprint $table) {
-            $table->dropColumn('cover_path');
+            $table->dropColumn('cover');
         });
     }
 };

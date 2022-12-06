@@ -11,7 +11,7 @@ class Series extends Model
     use HasFactory;
 
     protected $table = "series";
-    protected $fillable = ['name', 'user_id', 'cover_path'];
+    protected $fillable = ['name', 'user_id', 'cover'];
 
 	public function user()
     {
