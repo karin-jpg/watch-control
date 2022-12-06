@@ -15,7 +15,11 @@ class EloquentSeriesRepository implements SeriesRepository
 	{
 
 		return DB::transaction(function () use ($request) {
-			$seriesInfo = $request->all();
+			$seriesInfo = [
+				'name' => $request->name,
+				'user_id' => $request->user_id,
+				'cover' => $request->cover
+			];
 			$seriesInfo['user_id'] = Auth::id();
 
 			$series = Series::create($seriesInfo);
