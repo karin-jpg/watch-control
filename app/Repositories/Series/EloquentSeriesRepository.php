@@ -18,7 +18,7 @@ class EloquentSeriesRepository implements SeriesRepository
 			$seriesInfo = [
 				'name' => $request->name,
 				'user_id' => $request->user_id,
-				'cover' => $request->cover
+				'cover' => $request->coverPath
 			];
 			$seriesInfo['user_id'] = Auth::id();
 
